@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G WEB ARTICLES</title>
+  <!-- <link rel="stylesheet" href="forgot.css"> -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    overflow: hidden; /* Prevent scrolling */
+    /* background: url(bac.jpg) no-repeat; */
+    background: linear-gradient(#d6d5d5, #939294);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  nav {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0 100px; /* Adjusted padding for better alignment */
+    position: fixed;
+    top: 0;
+    background: linear-gradient(#3d3d3d, #241e2c);
+    z-index: 100; /* Ensures nav appears above other content */
+  }
+  
+  .logo {
+    float: left;
+  }
+  
+  .logo p {
+    margin: 0;
+    color: #fff;
+    font-size: 30px; /* Adjusted font size for better alignment */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+  }
+  
+  ul {
+    float: right;
+    list-style: none;
+  }
+  
+  ul li {
+    display: inline-block;
+    margin-left: 70px;
+  }
+  
+  ul li a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  body {
+    padding-top: 75px;
+  }
+  
+  nav li a:hover{
+    color: #ff8c69;
+    transition: all 0.4s ease 0s;
+  }
+  
+  
+  .wrapper {
+    /* margin-left: 60% ; */
+    width: 420px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    color: #000000;
+    border-radius: 12px;
+    padding: 30px 40px;
+  }
+  
+  .wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #000000b8;
+  }
+  
+  .wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(8, 8, 8, 0.4);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #000000;
+    padding: 20px 45px 20px 20px;
+  }
+  
+  .input-box input::placeholder {
+    font: bold;
+    font-weight: 530;
+    color: #000000;
+  }
+
+  
+  .input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+  
+  .wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+  }
+  
+  .remember-forgot label input {
+    accent-color: #000000;
+    margin-right: 2px;
+  }
+  
+  .remember-forgot a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .remember-forgot a:hover {
+    text-decoration: underline;
+  }
+  
+  .wrapper .btn {
+    width: 40%;
+    height: 45px;
+    margin-left: 30%;
+    margin-right: 30%;
+    background: blue;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+  }
+  
+  .register-link p a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .register-link p a:hover {
+    text-decoration: underline;
+  }
+  
+  .custom-select {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  
+  .custom-select select {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 45px 14px 20px;
+    font-size: 16px;
+    border: 2px solid rgba(8, 8, 8, 0.4);
+    border-radius: 40px;
+    background: transparent;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+  }
+  
+  .custom-select select:focus {
+    outline: none;
+    border-color: #000000;
+  }
+  
+  .options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .custom-select option{
+    margin: 2px;
+    padding: 2px;
+    color: rgb(255, 255, 255);
+    background-color: #3a3a3a;
+  }
+
+  .custom-select:focus .options {
+    display: block;
+  }
+  
+  .option {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .option:hover {
+    background-color: #000000;
+  }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+        <p>G Web Articles</p>
+    </div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact us</a></li> 
+    </ul>
+  </nav>
+
+  <div class="wrapper">
+    <form action="/set" method="POST">
+      <h1>Password reset</h1>
+      <div class="input-box">
+        <input type="text" name="username" placeholder="Username" required> <!-- Include username field -->
+        <i class='bx bxs-user'></i> 
+      </div>
+      <div class="custom-select">
+        <select name="question">
+          <option value="" selected disabled>Question</option>
+          <option value="option1">What is your nick name?</option>
+          <option value="option2">What is your favourite food?</option>
+          <option value="option3">Which is your favourite place?</option>
+          <option value="option3">Which is your favourite game?</option>
+          <option value="option3">What is the name of your favourite person?</option>
+        </select>
+        <div class="options">
+          <div class="option" onclick="selectOption('Option 1')">Option 1</div>
+          <div class="option" onclick="selectOption('Option 2')">Option 2</div>
+          <div class="option" onclick="selectOption('Option 3')">Option 3</div>
+        </div>
+      </div>     
+      <div class="input-box">
+        <input type="text" name="answer" placeholder="Answer" required> <!-- Include answer field -->
+        <i class='bx bx-clipboard'></i>
+      </div>
+
+      <button type="submit" class="btn">Submit</button>
+
+    </form>
+  </div>
+
+</body>
+</html>

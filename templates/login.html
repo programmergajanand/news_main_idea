@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G WEB ARTICLES</title>
+  <!-- <link rel="stylesheet" href="login.css"> -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    overflow: hidden; /* Prevent scrolling */
+    /* background: url(bac.jpg) no-repeat; */
+    background: linear-gradient(#d6d5d5, #939294);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  nav {
+    width: 100%;
+    height: 75px;
+    line-height: 75px;
+    padding: 0 100px; /* Adjusted padding for better alignment */
+    position: fixed;
+    top: 0;
+    background: linear-gradient(#3d3d3d, #241e2c);
+    z-index: 100; /* Ensures nav appears above other content */
+  }
+  
+  .logo {
+    float: left;
+  }
+  
+  .logo p {
+    margin: 0;
+    color: #fff;
+    font-size: 30px; /* Adjusted font size for better alignment */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+  }
+  
+  ul {
+    float: right;
+    list-style: none;
+  }
+  
+  ul li {
+    display: inline-block;
+    margin-left: 70px;
+  }
+  
+  ul li a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  body {
+    padding-top: 75px;
+  }
+  
+  nav li a:hover{
+    color: #ff8c69;
+    transition: all 0.4s ease 0s;
+  }
+  
+  .headings {
+    letter-spacing: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    padding-right: 40%;
+    text-align: left;
+    font-weight: bolder;
+    font-size: 150px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text */
+  }
+  
+  .wrapper {
+    margin-left: 60% ;
+    width: 420px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    border-radius: 12px;
+    padding: 30px 40px;
+  }
+  
+  .wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #000000b8;
+  }
+  
+  .wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(8, 8, 8, 0.4);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+  }
+  
+  .input-box input::placeholder {
+    color: #ffffff;
+  }
+  
+  .input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+  
+  .wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+  }
+  
+  .remember-forgot label input {
+    accent-color: #000000;
+    margin-right: 2px;
+  }
+  
+  .remember-forgot a {
+    color: #000000;
+    text-decoration: none;
+  }
+  
+  .remember-forgot a:hover {
+    text-decoration: underline;
+  }
+
+  .remember-forgot{
+    color: black;
+  }
+  
+  .wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #0252ff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  
+  .register-link p a:hover {
+    text-decoration: underline;
+  }
+
+  .wrapper hr{
+    margin-top: 15px;
+    border-color: #000000;
+  }
+
+  .forgot{
+    /* background: black; */
+    width: 60%;
+    height: 35px;
+    /* border: solid black; */
+    border-radius: 10px;
+    margin: 15px 20% 5px 20%;
+    /* padding: 4px; */
+    text-align: center;
+  }
+
+  .forgot button{
+    /* border: solid black; */
+    font-weight: 700;
+    color: blue;
+    /* background: black; */
+    margin: 4px;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .register{
+    background: green;
+    width: 60%;
+    height: 35px;
+    border: solid green;
+    border-radius: 10px;
+    margin: 15px 20% 5px 20%;
+    /* padding: 4px; */
+    text-align: center;
+    color: white;
+  }
+
+  .register button{
+    border: solid green;
+    font: bold;
+    font-weight: 600;
+    color: white;
+    background: green;
+    margin: 4px;
+  }
+  
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+        <p>G Web Articles</p>
+    </div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact us</a></li> 
+    </ul>
+  </nav>
+
+  <div class="headings">G WEB<br>ARTICLES</div>
+  <div class="wrapper">
+    <form action="/authenticate" method="POST"> <!-- Updated action to /password_reset -->
+      <h1>Login</h1>
+      <div class="input-box">
+        <input type="text" name="username" placeholder="Username" required>
+        <i class='bx bxs-user'></i> 
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt' ></i>
+      </div>
+      
+      <div class="remember-forgot">
+        <label><input type="checkbox">Remember Me</label>
+      </div>
+      <button type="submit" class="btn">Login</button><br>
+    </form>
+    <hr>
+    <div class="register">
+      <a href="{{ url_for('create') }}"><button>Create new account</button></a>
+    </div>
+
+  </div>
+</body>
+</html>

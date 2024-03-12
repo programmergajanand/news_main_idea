@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History</title>
+    <style>
+        body {
+            overflow: auto;
+            background: center no-repeat;
+            font-family: Arial, sans-serif;
+            background-color: #707070;
+            /* background: linear-gradient(#cecece, #414040); */
+            background-size: cover;
+            background-position: center;
+            /* height: 100vh; */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Link</th>
+                {% if admin %}
+                    <th>Username</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for search in search_history %}
+                <tr>
+                    <td>{{ search[1].strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ search[0] }}</td>
+                    {% if admin %}
+                        <td>{{ search[2] }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

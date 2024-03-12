@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G WEB ARTICLES</title>
+    <!-- <link rel="stylesheet" href="article.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        nav {
+            width: 100%;
+            height: 75px;
+            line-height: 75px;
+            padding: 0 100px; /* Adjusted padding for better alignment */
+            position: fixed;
+            top: 0;
+            background: linear-gradient(#3d3d3d, #241e2c);
+            z-index: 100; /* Ensures nav appears above other content */
+        }
+
+        .logo {
+            float: left;
+        }
+
+        .logo p {
+            margin: 0;
+            color: #fff;
+            font-size: 30px; /* Adjusted font size for better alignment */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            letter-spacing: 2px;
+            word-spacing: 4px;
+        }
+
+        ul {
+            float: right;
+            list-style: none;
+        }
+
+        ul li {
+            display: inline-block;
+            margin-left: 70px;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        body {
+            padding-top: 75px;
+        }
+
+        nav li a:hover {
+            color: #ff8c69;
+            transition: all 0.4s ease 0s;
+        }
+
+        body {
+            background: linear-gradient(#cecece, #414040);
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .article {
+            border-radius: 8px;
+            background-color:  rgb(85, 84, 84);
+            text-align: center;
+            margin: 5px 6px 6px 100px;
+            padding: 5px;
+            border: solid black;
+            width: 50%;
+            height: 800px;
+        }
+
+        .article-content {
+            background-color: rgb(175, 171, 171);
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .article-content p {
+            text-align: justify;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .article-content {
+            cursor: pointer;
+            word-spacing: 5px;
+            font-weight: 600;
+            font-size: 20px;
+            border-radius: 6px;
+            border: solid rgba(0, 0, 0, 0.6);
+            height: 750px; /* Specify a fixed height for the container */
+            overflow-y: auto; /* Add scrollbar if content exceeds container height */
+        }
+
+        .pos{
+            cursor: pointer;
+            text-align: center;
+            border-radius: 6px;
+            border: solid rgba(0, 0, 0, 0.6);
+            width: 100px; /* Specify a fixed height for the container */
+            height: 200px;
+            /* overflow-x: auto; Add scrollbar if content exceeds container height */
+        }
+
+        .info{
+            text-align: center;
+            border-radius: 8px;
+            border: solid black;
+            margin: 250px 100px 100px 100px;
+            padding: 20px;
+            background-color: rgb(88, 88, 88);
+        }
+
+        .info1{
+            display: flex;
+            margin: 6px;
+            
+        }
+
+        .sentences{
+            width: 250px;
+            height: 200px;
+            margin: 6px;
+            border: solid rgb(46, 46, 46);
+            border-radius: 6px;
+            background-color: rgb(175, 171, 171);
+        }
+
+        .sentences p{
+            font-size: 50px;
+        }
+
+        .words{
+            width: 250px;
+            height: 200px;
+            margin: 6px;
+            border: solid rgb(46, 46, 46);
+            border-radius: 6px;
+            background-color: rgb(175, 171, 171);
+        }
+
+        .words p{
+            font-size: 50px;
+        }
+
+
+        .pos{
+            font-weight: 600;
+            text-align: center;
+            width: 200px;
+            height: 200px;
+            margin: 6px;
+            border: solid rgb(46, 46, 46);
+            border-radius: 6px;
+            background-color: rgb(175, 171, 171);
+            overflow-x: auto;
+        
+        }
+
+        .info2{
+            margin: 1px;
+            padding: 20px;
+        }
+
+        .pos ul{
+            margin-right: 30px;
+            text-align: left;
+        }
+
+        .pos hr {
+            border-color:#979696;
+            margin: 5px 5px 5px 60px;
+        }
+
+        
+
+
+    </style>
+</head>
+<body>
+<!-- <nav>
+    <div class="logo">
+        <p>G Web Articles</p>
+    </div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact us</a></li>
+    </ul>
+</nav> -->
+
+<div class="article">
+    <div class="read" >
+        <h1>Read Your Article</h1>
+        <div class="article-content">
+            <h2><p>{{ analysis_results.heading }}</p></h2>
+            <p>{{ cleaned_article }}</p>
+        </div>
+    </div>
+</div>
+<div class="info">
+    <h2>Related Information</h2>
+    <div class="info1">
+        <div class="sentences">
+            <h2>No. of sentences</h2><br>
+            <p>{{ analysis_results.num_sentences }}</p>
+        </div>
+        <div class="words">
+            <h2>No. of words</h2><br>
+            <p>{{ analysis_results.num_words }}</p>
+        </div>
+
+        <div class="pos">
+            <h2>POS tag counts</h2>
+            <ul>
+                {% for tag, count in analysis_results.pos_tag_counts.items() %}
+                    <li>{{ tag }}: {{ count }}</li>
+                    <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
