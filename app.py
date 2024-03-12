@@ -130,7 +130,7 @@ def connect_to_db():
             dbname=DB_NAME,
             user=DB_USER,
             password=DB_PASSWORD,
-            host=DB_HOST
+            host=DB_HOST,
             port="5432"
         )
         return conn
