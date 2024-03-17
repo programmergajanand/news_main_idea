@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import psycopg2
-# from scraper import scrape_and_analyze
 import os
 from datetime import datetime
 import requests
@@ -9,6 +8,9 @@ import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.tag import pos_tag
 from collections import Counter
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -271,14 +273,22 @@ def submit():
 def register():
     return render_template('register.html')
 
+def clean_text(text):
+    # Remove HTML tags
+    cleaned_text = BeautifulSoup(text, 'html.parser').get_text(separator=' ')
+    # Remove extra whitespaces and newlines
+    cleaned_text = ' '.join(cleaned_text.split())
+    return cleaned_text
+
+
 # Route for scraping and analyzing
-@app.route('/scrape_and_analyze', methods=['GET'])
+@app.route('/scrape_and_analyze', methods=['POST'])
 def analyze():
     if 'username' not in session:
         return redirect(url_for('home'))  # Redirect if user is not logged in
 
     username = session['username']
-    url = request.args.get('url')
+    url = request.form['url']
     
     conn = connect_to_db()
     if conn:
@@ -288,12 +298,40 @@ def analyze():
         conn.commit()
         cur.close()
         conn.close()
+
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, 'html.parser')
         
-        analysis_results, cleaned_article = scrape_and_analyze(url)
-        return render_template('analysis_result.html', analysis_results=analysis_results, cleaned_article=cleaned_article)
-    else:
-        return "Error connecting to database"
-    
+        # Extract title and text from the article
+        title = soup.title.string.strip() if soup.title else "No Title Found"
+        article = ' '.join([p.get_text(separator=' ') for p in soup.find_all('p')])
+        
+        # Clean the text
+        cleaned_article = clean_text(article)
+        
+        # Tokenize the cleaned text
+        words = word_tokenize(cleaned_article)
+        sentences = sent_tokenize(cleaned_article)
+        
+        # POS tagging
+        pos_tags = pos_tag(words)
+        
+        # Count words, sentences, and POS tags
+        word_count = len(words)
+        sentence_count = len(sentences)
+        pos_counts = Counter(tag for word, tag in pos_tags)
+        
+        analysis_results = {
+            'heading': title,
+            'num_words': word_count,
+            'num_sentences': sentence_count,
+            'pos_tag_counts': pos_counts
+        }
+
+        return render_template('result.html', 
+                            analysis_results=analysis_results,
+                            cleaned_article=cleaned_article)
+
 
 @app.route('/history')
 def history():
