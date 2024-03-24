@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add this line to include Cropper.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Online Beauty Parlour</title>
+    <style>
+        body{
+            background-position: center;
+            background-size: cover;
+            background-color: #081b29;
+        }
+
+
+        .hidden {
+            display: none;
+        }
+
+        .editor {
+            border: solid white;
+            border-radius: 10px;
+            max-width: 100%;
+            margin: 10px auto;
+            padding: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            /* flex-direction: column; */
+            align-items: center;
+        }
+
+        .right-container, .left-container {
+            width: 100%;
+        }
+
+        .image-operation-container {
+            margin-bottom: 20px;
+        }
+
+        .image-container{
+            padding: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tg {
+            margin: 5px;
+        }
+
+        .buttons {
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .buttons button{
+            border-radius: 50%;
+            border: transparent;
+            background-color: yellowgreen;
+            margin: 2px;
+        }
+
+        .download {
+            margin: 10px;
+            text-align: center;
+        }
+
+        #processed-image, #cropper-image {
+            max-width: 90%;
+            height: auto;
+        }
+
+        #cropper-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        .crop-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .crop-buttons button {
+            margin: 0 5px;
+        }
+
+        button:hover {
+            animation: glow 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px #0ef;
+            }
+            100% {
+                box-shadow: 0 0 20px #0ef;
+            }
+        }
+
+
+        #sentence {
+            text-align: center;
+            font-size: 24px;
+            margin: 50px 25% 20px 23%;
+            padding: 10px;
+            height: 100px;
+            width: 50%;
+            }
+
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 10px;
+            background: #051129;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            position: relative;
+            font-size: 25px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: default;
+            animation: slideRight 1s ease forwards;
+        }
+
+
+        .navbar a {
+            display: inline-block;
+            font-size: 25px;
+            color: #fff;
+            font-weight: 500;
+            margin-left: 35px;
+            transition: .3s;
+            opacity: 0;
+            animation: slideTop .5s ease forwards;
+            animation-delay: calc(.2s * var(--1));
+        }
+
+        .navbar a:hover {
+            color: #0ef;
+        }
+
+        .home {
+            position: relative;
+            width: 100%;
+            justify-content: space-between;
+            height: 100vh;
+            background: url(upper.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 70px 10% 0;
+        }
+
+        .home-content {
+            max-width: 600px;
+        }
+
+        .home-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            /* opacity: 0; */
+            animation: slideBottom 1s ease forwards;
+            animation-delay: 0.7s;
+        }
+
+        .home-content h3:nth-last-of-type(2) {
+            margin-bottom: 3px;
+            animation: slideTop 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .home-content h3 span {
+            color: #0ef;
+        }
+
+        .home-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin: 2px 0;
+            opacity: 0;
+            animation: slideRight 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .home-content p {
+            font-size: 20px;
+            /* opacity: 0; */
+            animation: slideLeft 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .home-sci a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid #0ef;
+            border-radius: 50%;
+            font-size: 20px;
+            color: #0ef;
+            text-decoration: none;
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            margin: 30px 15px 30px 0;
+        }
+
+        .home-sci a:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .home-sci a:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .home-sci a:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .home-sci a:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .home-sci a:nth-child(5) {
+            animation-delay: 1s;
+        }
+
+        .home-sci a:nth-child(6) {
+            animation-delay: 1.2s;
+        }
+
+
+        .home-sci a:hover {
+            background-color: #0ef;
+            color: #081b29;
+            box-shadow: 0 0 20px #0ef;
+        }
+
+        .btn-box {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #0ef;
+            border-radius: 40px;
+            font-size: 16px;
+            color: #081b29;
+            letter-spacing: 1px;
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0;
+            animation: slideTop 1s ease forwards;
+            animation-delay: 2s;
+            box-shadow: 0 0 5px #0ef,
+                0 0 25px #0ef
+        }
+
+        .btn-box:hover {
+            box-shadow: 0 0 5px cyan,
+                0 0 25px cyan, 0 0 50px cyan,
+                0 0 100px cyan, 0 0 200px cyan;
+        }
+
+        @keyframes slideRight {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideLeft {
+            0% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideTop {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideBottom {
+            0% {
+                transform: translateY(100px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .about{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .about-img img{
+            padding-bottom: 20%;
+            max-width: 630px;
+            height: auto;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .about-text h2{
+            font-size: 60px;
+        }
+
+        .about-text h2 span{
+            color: #0ef;
+        }
+
+        .about-text h4{
+            font-size: 29px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.7;
+            margin: 15px 0 30px;
+        }
+
+        .about-text p{
+            color: aliceblue;
+            font-size: 20px;
+            line-height: 1.4;
+            margin-bottom: 4rem;
+        }
+
+        #services{
+            color: aliceblue;
+            font-size: 20px;
+            line-height: 1.4;
+            margin-bottom: 4rem;
+        }
+
+        .sub-title{
+            text-align: center;
+            font-size: 60px;
+            padding-bottom: 70px;
+        }
+
+        .sub-title span{
+            color: #0ef;
+        }
+
+        .container{
+            padding: 90px;
+
+        }    
+
+        .service-list{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(259px,1fr));
+            grid-gap: 40px;
+            margin-top: 50px;
+        }
+
+        .service-list div{
+            background-color: transparent;
+            padding: 40px;
+            font-size: 13px;
+            font-weight: 13px;
+            border-right: 10px;
+            border-radius: 20px;
+            transition: background 0.5s, transform 0.5s;
+            box-shadow: 1px 1px 20px #012290f7,
+                        1px 1px 40px #0053b8f7;
+        }
+
+        .service-list div{
+            font-size: 50px;
+            margin-top: 30px;
+        }
+
+        .service-list div h2{
+            color: white;
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .service-list div a{
+            text-decoration: none;
+            color: #000000;
+            font-size: 12px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .service-list p{
+            color: white;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1 style="text-align: center; color: white;">Online Beauty Parlour</h1>
+        <div id="sentence" style="color: white; font-weight: 600; "></div>
+
+
+        <div class="home-sci" style="margin: 30px 0 30px 10px;">
+            <h2 style="color: white; margin-left: 90px;">Contact Developer</h2>
+            <a href="#" id="myButton3" style="--1:7"><i class='bx bxl-facebook'></i></a>
+            <a href="#" id="myButton4" style="--1:7"><i class='bx bxl-youtube' ></i></a>
+            <a href="https://www.instagram.com/premiumartplace?igsh=aGlzazI1M3JnYXdn" id="myButton5" style="--1:8"><i class='bx bxl-instagram'></i></a>
+            <a href="https://w.app/4ht6rb" id="myButton6" style="--1:9"><i class='bx bxl-whatsapp'></i></a>
+            <a href="https://www.linkedin.com/in/gajanand-mourya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" id="myButton7" style="--1:10"><i class='bx bxl-linkedin'></i></a>
+            <a href="https://github.com/programmergajanand" id="myButton8" style="--1:11"><i class='bx bxl-github'></i></a>
+        </div>
+    </div>
+    <div class="editor">
+        <h1 style="text-align: center; color: white;">Edit Your Photo</h1>
+        <h2 style="color: white;">Select Image</h2>
+        <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
+            <input type="file" id="image-upload" name="image" accept="image/*" style="color: white;" required>
+        </form>
+        <div class="main-container">
+            <div class="right-container">
+                <div class="crop-buttons">
+                    <button onclick="setAspectRatio(1)">1:1</button>
+                    <button onclick="setAspectRatio(16/9)">16:9</button>
+                    <button onclick="setAspectRatio(4/3)">4:3</button>
+                    <input type="number" id="aspect-width" placeholder="Width">
+                    <input type="number" id="aspect-height" placeholder="Height">
+                    <button onclick="setCustomAspectRatio()">Apply</button>
+                </div>
+                <div class="image-operation-container operation-container">
+                    <div class="button-container">
+                        <div class="tg">
+                            <button onclick="toggleRotate()">Rotate</button>
+                            <div class="buttons">
+                                <button class="hidden" id="rotate-left" onclick="rotateImage(-10)"><i class="fa fa-rotate-left"></i></button>
+                                <button class="hidden" id="rotate-right" onclick="rotateImage(10)"><i class="fa fa-rotate-right"></i></button>
+                            
+                            </div>
+                        </div>
+                        <div class="tg">
+                            <button onclick="toggleBlur()">Blur</button>
+                            <div class="buttons">
+                                <button class="hidden" id="increase-blur" onclick="changeBlur(1)">⬆</button>
+                                <button class="hidden" id="decrease-blur" onclick="changeBlur(-1)">⬇</button>
+                            </div>
+                        </div>
+                        <div class="tg">
+                            <button onclick="toggleTemperature()">Temperature</button>
+                            <div class="buttons">
+                                <button class="hidden" id="increase-temperature" onclick="changeVintage(10)">🔥</button>
+                                <button class="hidden" id="decrease-temperature" onclick="changeVintage(-10)">💧</button>
+                            </div>
+                        </div>
+                        <div class="tg">
+                            <button onclick="toggleGrayscale()">Greyscale</button>
+                            <div class="buttons">
+                                <button class="hidden" id="add-grayscale" onclick="changeGrayscale(10)">⬆</button>
+                                <button class="hidden" id="remove-grayscale" onclick="changeGrayscale(-10)">⬇</button>
+                            </div>
+                        </div>
+                        <div class="tg">
+                            <button onclick="toggleSharpness()">Darkness</button>
+                            <div class="buttons">
+                                <button class="hidden" id="decrease-sharpness" onclick="changeSharpness(-1)">⚫</button>
+                                <button class="hidden" id="increase-sharpness" onclick="changeSharpness(1)">💡</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left-container">
+                <div class="image-operation-container">
+                    <div class="image-container" style="border: solid white;">
+                        <img id="processed-image" src="" alt="">
+                        <img id="cropper-image" src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="download">
+                <button id="download-button" onclick="downloadImage()"><i class="fa fa-download" style="font-size:24px"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="services" itemref="services">
+            <div class="container">
+                <h1 class="sub-title" style="color: white;">My <span>Services</span></h1>
+                <div class="service-list">
+                    <div>
+                        <i class='bx bx-camera' style="color: #00eeff;"></i>
+                        <h2>Expertise and Experience</h2>
+                        <p>Wedding cameraman services typically offer experienced professionals who are skilled in capturing the special moments of a wedding day. They understand the nuances of wedding events and know how to navigate various lighting conditions and venues to ensure high-quality footage.</p>
+                    </div>
+                    <div>
+                        <i class='bx bx-camera-movie' style="color: #00eeff;"></i>
+                        <h2>Range of Services</h2>
+                        <p>These services often provide a range of packages to suit different needs and budgets. They may include options such as pre-wedding shoots, full-day coverage, drone footage, edited highlight reels, and even live streaming for remote guests.</p>
+                    </div>
+                    <div>
+                        <i class='bx bx-photo-album' style="color: #00eeff;"></i>
+                        <h2>Professional Equipment</h2>
+                        <p>Wedding cameraman services usually come equipped with professional-grade cameras, lenses, stabilizers, and audio recording devices to ensure clear, sharp, and cinematic footage. They may also offer additional services such as photo booths or instant printing to enhance the overall wedding experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+
+        const processedImage = document.getElementById('processed-image');
+        const increaseBlurButton = document.getElementById('increase-blur');
+        const decreaseBlurButton = document.getElementById('decrease-blur');
+        const increaseTemperatureButton = document.getElementById('increase-temperature');
+        const decreaseTemperatureButton = document.getElementById('decrease-temperature');
+        const rotateRightButton = document.getElementById('rotate-right');
+        const rotateLeftButton = document.getElementById('rotate-left');
+        const increaseSharpnessButton = document.getElementById('increase-sharpness');
+        const decreaseSharpnessButton = document.getElementById('decrease-sharpness');
+        const addGrayscaleButton = document.getElementById('add-grayscale');
+        const removeGrayscaleButton = document.getElementById('remove-grayscale');
+
+        let contrastValue = 100;
+        let blurValue = 0;
+        let rotationValue = 0;
+        let vintageValue = 0;
+        let grayscaleValue = 0;
+
+
+        const updateImage = () => {
+            processedImage.style.filter = `contrast(${contrastValue}%) blur(${blurValue}px) grayscale(${grayscaleValue}%) sepia(${vintageValue}%) brightness(${sharpnessValue}%)`;
+            processedImage.style.transform = `rotate(${rotationValue}deg)`;
+        };
+
+        const changeContrast = (value) => {
+            contrastValue += value;
+            if (contrastValue < 0) contrastValue = 0;
+            if (contrastValue > 200) contrastValue = 200;
+            updateImage();
+        };
+
+        const toggleBlur = () => {
+            const areBlurButtonsHidden = increaseBlurButton.classList.contains('hidden');
+            increaseBlurButton.classList.toggle('hidden', !areBlurButtonsHidden);
+            decreaseBlurButton.classList.toggle('hidden', !areBlurButtonsHidden);
+        };
+
+        const rotateImage = (value) => {
+            rotationValue += value;
+            updateImage();
+        };
+
+        const changeVintage = (value) => {
+            vintageValue += value;
+            if (vintageValue < 0) vintageValue = 0;
+            if (vintageValue > 100) vintageValue = 100;
+            updateImage();
+        };
+
+        const changeGrayscale = (value) => {
+            grayscaleValue += value;
+            if (grayscaleValue < 0) grayscaleValue = 0;
+            if (grayscaleValue > 100) grayscaleValue = 100;
+            updateImage();
+        };
+
+        const changeBlur = (value) => {
+            blurValue += value;
+            if (blurValue < 0) blurValue = 0;
+            updateImage();
+        };
+
+        const updateUploadedImage = () => {
+            const uploadedImage = document.getElementById('image-upload').files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                processedImage.src = e.target.result;
+                contrastValue = 100;
+                blurValue = 0;
+                rotationValue = 0;
+                vintageValue = 0;
+                grayscaleValue = 0;
+                updateImage();
+            };
+
+            reader.readAsDataURL(uploadedImage);
+        };
+
+        const toggleRotate = () => {
+            const areRotateButtonsHidden = rotateRightButton.classList.contains('hidden');
+            rotateRightButton.classList.toggle('hidden', !areRotateButtonsHidden);
+            rotateLeftButton.classList.toggle('hidden', !areRotateButtonsHidden);
+        };
+
+        const toggleTemperature = () => {
+            const areTemperatureButtonsHidden = increaseTemperatureButton.classList.contains('hidden');
+            increaseTemperatureButton.classList.toggle('hidden', !areTemperatureButtonsHidden);
+            decreaseTemperatureButton.classList.toggle('hidden', !areTemperatureButtonsHidden);
+        };
+
+        let sharpnessValue = 100;
+
+        const toggleSharpness = () => {
+            const areSharpnessButtonsHidden = increaseSharpnessButton.classList.contains('hidden');
+            increaseSharpnessButton.classList.toggle('hidden', !areSharpnessButtonsHidden);
+            decreaseSharpnessButton.classList.toggle('hidden', !areSharpnessButtonsHidden);
+        };
+
+        const changeSharpness = (value) => {
+            sharpnessValue += value;
+            if (sharpnessValue < 0) sharpnessValue = 0;
+            if (sharpnessValue > 100) sharpnessValue = 100;
+            updateImage();
+
+            // Send a POST request to the server to update the brightness
+            fetch('/brightness', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    brightness: sharpnessValue,
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update brightness');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating brightness:', error);
+            });
+        };
+
+
+        const toggleGrayscale = () => {
+            const areGrayscaleButtonsHidden = addGrayscaleButton.classList.contains('hidden');
+            addGrayscaleButton.classList.toggle('hidden', !areGrayscaleButtonsHidden);
+            removeGrayscaleButton.classList.toggle('hidden', !areGrayscaleButtonsHidden);
+        };
+
+        const setAspectRatio = (aspectRatio) => {
+            cropper.setAspectRatio(aspectRatio);
+        };
+
+        const setCustomAspectRatio = () => {
+            const width = parseInt(document.getElementById('aspect-width').value);
+            const height = parseInt(document.getElementById('aspect-height').value);
+            if (!isNaN(width) && !isNaN(height) && width > 0 && height > 0) {
+                cropper.setAspectRatio(width / height);
+            } else {
+                alert('Please enter valid width and height values.');
+            }
+        };
+
+
+        document.getElementById('image-upload').addEventListener('change', updateUploadedImage);
+
+        const downloadImage = () => {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            const naturalWidth = processedImage.naturalWidth;
+            const naturalHeight = processedImage.naturalHeight;
+
+            canvas.width = naturalWidth;
+            canvas.height = naturalHeight;
+
+            // Use the rotated image instead of the original image
+            context.filter = processedImage.style.filter;
+            context.translate(naturalWidth / 2, naturalHeight / 2);
+            context.rotate((rotationValue * Math.PI) / 180);
+            context.drawImage(processedImage, -naturalWidth / 2, -naturalHeight / 2);
+
+            const link = document.createElement('a');
+            link.download = 'edited_image.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var sentences = [
+                "Crop Image",
+                "Blur Image",
+                "Adjust Temperature",
+                "Grey Scale Filter",
+                "Darkness Filter"
+            ];
+
+            var index = 0;
+            var sentenceElement = document.getElementById("sentence");
+            var letterIndex = 0;
+            var isDeleting = false;
+            var typingSpeed = 80; // Adjust typing speed (milliseconds)
+
+            function typeSentence() {
+                var currentSentence = sentences[index];
+                if (!isDeleting && letterIndex <= currentSentence.length) {
+                sentenceElement.textContent = currentSentence.substring(0, letterIndex);
+                letterIndex++;
+                setTimeout(typeSentence, typingSpeed);
+                } else if (isDeleting && letterIndex >= 0) {
+                sentenceElement.textContent = currentSentence.substring(0, letterIndex);
+                letterIndex--;
+                setTimeout(typeSentence, typingSpeed / 2);
+                } else {
+                isDeleting = !isDeleting;
+                if (isDeleting) {
+                    setTimeout(typeSentence, typingSpeed * 2); // Pause before starting to delete
+                } else {
+                    index = (index + 1) % sentences.length;
+                    letterIndex = 0;
+                    setTimeout(typeSentence, typingSpeed); // Pause before typing next sentence
+                }
+                }
+            }
+
+            typeSentence();
+        });
+
+
+    </script>
+</body>
+</html>
